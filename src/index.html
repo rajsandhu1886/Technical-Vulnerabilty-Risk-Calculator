@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Technical Vulnerability Risk Calculator</title>
+        <link href="./css/style.css" rel="stylesheet">
+		<script src="./js/charts.js"></script>
+	</head>
+	<body class="min-h-screen">
+		<div class="flex flex-col lg:grid grid-cols-12 lg:min-h-screen">
+			<div class="col-span-7 grid place-content-start">
+				<div class="items-center p-4 mt-4" style="grid-template-columns:1fr 3fr 1fr">
+					<h1 class="text-center text-xl font-black">Technical Vulnerability Risk Calculator</h1>
+
+					<div class="mt-4 text-sm">
+						<p>Discovering security vulnerabilities is essential, but estimating the associated risk to the business is critical. One may identify security vulnerabilities in any IT solution's architecture, design, source code review, or penetration testing. This calculator will allow security professionals to estimate the probability of a specific vulnerability being discovered and exploited and estimate the magnitude of the impact on the system if the vulnerability were to be exploited in line with areas of concern; confidentiality, integrity, availability, and traceability. This vulnerability risk calculation is a qualitative assessment that takes less time and resources than quantitative analysis.</p>
+						<br>
+					</div>
+				</div>
+				<hr class="my-4">
+				<div class="lg:grid gap-4 grid-cols-2 m-4 items-center text-sm">
+
+					<!-- Vulnerability -->
+					<div class="lg:grid gap-4 lg:grid-cols-2 items-center p-4 border-2 rounded-lg">
+						<h2 class="col-span-2 text-xl text-center font-bold"><span class="underline">Probability</span><br><small>Vulnerability Factors</small></h2>
+						<hr class="col-span-2 text-lg text-center">
+						
+						<!-- v-eod -->
+						<label for="" class="block">Ease of Discovery</label>
+						<select onchange="vulnerabilityCalc()" name="v-eod" id="v-eod" class="block border-2 p-2 rounded-lg w-full ">
+							<option class="" value="00">Select</option>
+							<option class="" value="1">Practically Impossible</option>
+							<option class="" value="3">Difficult</option>
+							<option class="" value="4">Easy</option>
+							<option class="" value="5">Automated Tools Available</option>
+						</select>
+						<!-- v-eod -->
+
+						<!-- v-eoe -->
+						<label for="" class="block">Ease of Exploit</label>
+						<select onchange="vulnerabilityCalc()" name="v-eoe" id="v-eoe" class="block border-2 p-2 rounded-lg w-full ">
+							<option class="" value="00">Select</option>
+							<option class="" value="1">Non Exploitable</option>
+							<option class="" value="3">Difficult</option>
+							<option class="" value="4">Easy</option>
+							<option class="" value="5">Automated Tools Available</option>
+						</select>
+						<!-- v-eoe -->
+
+						<!-- v-a -->
+						<label for="a">Awareness</label>
+						<select onchange="vulnerabilityCalc()" name="v-a" id="v-a" class="block border-2 p-2 rounded-lg w-full ">
+							<option class="" value="00">Select</option>
+							<option class="" value="1">Unknown</option>
+							<option class="" value="3">Hidden</option>
+							<option class="" value="4">Obvious</option>
+							<option class="" value="5">Public Knowledge</option>
+						</select>
+						<!-- v-a -->
+
+						<!-- v-atd -->
+						<label for="" class="block">Ability to Detect</label>
+						<select onchange="vulnerabilityCalc()" name="v-atd" id="v-atd" class="block border-2 p-2 rounded-lg w-full ">
+							<option class="" value="00">Select</option>
+							<option class="" value="1">Active Detection in Application</option>
+							<option class="" value="3">Logged and Monitored</option>
+							<option class="" value="4">Logged without Monitoring</option>
+							<option class="" value="5">Not Logged</option>
+						</select>
+						<!-- v-atd -->
+					</div>
+					<!-- Vulnerability -->
+
+					<!-- Technical -->
+					<div class="lg:grid gap-4 lg:grid-cols-2 items-center p-4 border-2 rounded-lg">
+						<h2 class="col-span-2 text-xl text-center font-bold"><span class="underline">Impact</span><br> <small>Technical Impact Factors </small> </h2>
+						<hr class="col-span-2 text-lg text-center">
+						
+						<!-- t-loc -->
+						<label for="" class="block">Loss of Confidentiality</label>
+						<select onchange="techCalc()" name="t-loc" id="t-loc" class="block border-2 p-2 rounded-lg w-full ">
+							<option class="" value="00">Select</option>
+							<option class="" value="0">No Data Disclosed</option>
+							<option class="" value="1">Non-Sensitive Data Disclosed</option>
+							<option class="" value="3">Sensitive Data Disclosed</option>
+							<option class="" value="4">Personal Data Disclosed</option>
+							<option class="" value="5">All Data Disclosed</option>
+						</select>
+						<!-- t-loc -->
+
+						<!-- t-loi -->
+						<label for="" class="block">Loss of Integrity</label>
+						<select onchange="techCalc()" name="t-loi" id="t-loi" class="block border-2 p-2 rounded-lg w-full ">
+							<option class="" value="00">Select</option>
+							<option class="" value="0">No Loss of Integrity</option>
+							<option class="" value="1">Low Corrupt Data</option>
+							<option class="" value="3">Moderate Corrupt Data</option>
+							<option class="" value="4">Significant Corrupt Data</option>
+							<option class="" value="5">Severe Corrupt Data</option>
+						</select>
+						<!-- t-loi -->
+
+						<!-- t-loa -->
+						<label for="" class="block">Loss of Availability</label>
+						<select onchange="techCalc()" name="t-loa" id="t-loa" class="block border-2 p-2 rounded-lg w-full ">
+							<option class="" value="00">Select</option>
+							<option class="" value="0">No Loss of Availability</option>
+							<option class="" value="1">Secondary Services Interrupted</option>
+							<option class="" value="3">Primary Services Interrupted</option>
+							<option class="" value="5">All Services Completely Lost</option>
+						</select>
+						<!-- t-loa -->
+
+						<!-- t-lot -->
+						<label for="" class="block">Loss of Traceabilty</label>
+						<select onchange="techCalc()" name="t-lot" id="t-lot" class="block border-2 p-2 rounded-lg w-full ">
+							<option class="" value="00">Select</option>
+							<option class="" value="1">Completely Traceable</option>
+							<option class="" value="3">Possibly Traceable</option>
+							<option class="" value="5">Completely Anonymous</option>
+						</select>
+						<!-- t-lot -->
+					</div>
+					<!-- Technical -->
+
+					<!-- Probability -->
+					<div class="grid gap-4 grid-cols-2 items-center p-4 border-2 rounded-lg">
+						<h2 class="text-sm sm:text-lg font-bold">Probability Score</h2>
+						<div id="vulnerability" class="text-sm sm:text-lg p-2 text-center bg-slate-100 rounded-lg font-bold">0</div>
+					</div>
+					<!-- Probability -->
+					
+					<!-- Impact -->
+					<div class="grid gap-4 grid-cols-2 items-center p-4 border-2 rounded-lg">
+						<h2 class="text-sm sm:text-lg font-bold">Impact Score</h2>
+						<div id="impact" class="text-sm sm:text-lg p-2 text-center bg-slate-100 rounded-lg font-bold">0</div>
+					</div>
+					<!-- Impact -->
+					<hr  class="col-span-2" />
+					<div class="col-span-2 text-center w-full" title="click to copy URL" onclick="copy(this)"><span class='font-bold'>Vector: </span> <span id="vector" class="w-full block"></span></div>
+					<a href="." class="col-span-2 text-center text-blue-500 underline">Reset</a>
+				</div>
+				<!-- TEST -->
+
+				<!-- Footer -->
+				<footer class="p-4 text-xs max-w-xl">
+					<span onclick="toggleExplainer()" class="text-blue-500 underline cursor-pointer inline-block text-lg mb-2">How is the Vulnerability Risk Calculated?</span> <br>
+					<br>
+					<p class="p-4 border-2"><strong class="font-bold">Disclaimer:</strong> This calculator is inspired by <a class="underline text-blue-500" target="_blank" rel="noopener noreferrer" href="https://owasp.org/www-community/OWASP_Risk_Rating_Methodology">OWASP's Risk Rating Methodology</a> which does not include "Threat Agent Factors" and "Business Impact Factors" as organizations require an enhanced Threat Intelligence capability and a mature Configuration Management Database (CMDB) to use the publicly available <a class="underline text-blue-500" target="_blank" rel="noopener noreferrer" href="https://www.security-net.biz/files/owaspriskcalc.html">OWASP Risk Rating Calculator</a>.</p>
+
+					<p class="p-4 border-2">Tool Creator: <a class="underline text-blue-500" target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/raj-sandhu-53522a64/">Raj Sandhu (Ethical Hacker @ WHO)</a></p>
+				</footer>
+			</div>
+			<div class="col-span-5 lg:min-h-screen bg-slate-100 p-4 w-full">
+				<canvas class="mt-4 mb-8 mx-auto" style="max-width:640px" id="riskChart"></canvas>
+
+				<!-- <div class="grid gap-4 grid-cols-3 items-center p-4 border-2 rounded-lg">
+					<div class="col-span-3">
+						<p class="text-sm">The Vulnerability and Technical Impact factors have several options with a (Probability) & (Impact) rating from 0 to 10 associated. These numbers are used to estimate the severity based on the formulas below:</p> <br>
+						</div>
+					<div class="col-span-3">
+						<p class="p-2 border-2 italic text-sm"><span class="font-bold">Probability Score</span> = (Ease of Discovery <span id="v-eod_result"></span> + Ease of Exploit <span id="v-eoe_result"></span> + Awareness <span id="v-a_result"></span> + Ability to Detect <span id="v-atd_result"></span>) / 4</p>
+
+						<p class="p-2 border-2 italic text-sm"><span class="font-bold">Impact Score</span> = (Loss of Confidentiality <span id="t-loc_result"></span> + Loss of Integrity <span id="t-loi_result"></span> + Loss of Availability <span id="t-loa_result"></span> + Loss of Traceability <span id="t-lot_result"></span>) / 4</p>
+
+						<p class="p-2 border-2 italic text-sm"><span class="font-bold">Total Risk = (Probability <span id="probability_result"></span> * Impact <span id="impact_result"></span>) * 0.5</span> <span id="totalrisk"></span></p>
+						<p class="p-2 border-2 italic text-sm">0.5 is a normalized score on a 10 point scale across both Vulnerability & Technical Impact Factors</p>
+					</div>
+					<h2 class="text-lg font-bold">Total Risk</h2>
+					<div id="status" class="text-lg p-2 text-center bg-slate-100 rounded-lg font-bold">None</div>
+					<span></span>
+				</div> -->
+				<div class="my-4">
+					<div class="grid mx-auto" style="width:100%; max-width:640px; grid-template-columns: 0.5fr 1fr 0.4fr 0.75fr 0.5fr 1fr 1fr 1fr;">
+
+						<div class="col-span-8 row-start-7 sm:row-start-auto sm:col-span-3 sm:row-span-3 grid place-items-center font-bold border border-slate-200">
+							Risk Matrix
+						</div>
+
+						<div class="border border-slate-200 text-sm px-2 py-1 col-span-8 sm:col-span-5 sm:col-start-4 bg-slate-200 text-center font-bold">Impact</div>
+						<div class="border border-slate-200 text-xs px-2 py-1 col-span-3 sm:col-span-1 sm:col-start-4 font-bold">Very Low</div>
+						<div class="border border-slate-200 text-xs px-2 py-1 col-span-1 sm:col-span-1 sm:col-start-5 font-bold">Low</div>
+						<div class="border border-slate-200 text-xs px-2 py-1 col-span-1 sm:col-span-1 sm:col-start-6 font-bold">Medium</div>
+						<div class="border border-slate-200 text-xs px-2 py-1 col-span-1 sm:col-span-1 sm:col-start-7 font-bold">High</div>
+						<div class="border border-slate-200 text-xs px-2 py-1 col-span-2 sm:col-span-1 sm:col-start-8 font-bold">Very High</div>
+						<div data-imp="1" class="imp border border-slate-200 text-xs px-2 py-1 col-span-3 sm:col-span-1 sm:col-start-4">1</div>
+						<div data-imp="2" class="imp border border-slate-200 text-xs px-2 py-1 col-span-1 sm:col-span-1 sm:col-start-5">2</div>
+						<div data-imp="3" class="imp border border-slate-200 text-xs px-2 py-1 col-span-1 sm:col-span-1 sm:col-start-6">3</div>
+						<div data-imp="4" class="imp border border-slate-200 text-xs px-2 py-1 col-span-1 sm:col-span-1 sm:col-start-7">4</div>
+						<div data-imp="5" class="imp border border-slate-200 text-xs px-2 py-1 col-span-2 sm:col-span-1 sm:col-start-8">5</div>
+	
+						<div class="border border-slate-200 text-sm px-2 sm:px-4 py-1 sm:row-span-5 col-span-8 sm:col-span-1 sm:col-start-1 sm:row-start-4 sm:relative bg-slate-200 text-center font-bold grid place-items-center"><span class="sm:-rotate-90 sm:absolute sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2">Probability</span></div>
+						<div class="border border-slate-200 text-xs px-2 py-1 col-span-3 sm:col-span-1 sm:col-start-2 sm:row-start-4 font-bold">Very Low</div>
+						<div class="border border-slate-200 text-xs px-2 py-1 col-span-1 sm:col-span-1 sm:col-start-2 sm:row-start-5 font-bold">Low</div>
+						<div class="border border-slate-200 text-xs px-2 py-1 col-span-1 sm:col-span-1 sm:col-start-2 sm:row-start-6 font-bold">Medium</div>
+						<div class="border border-slate-200 text-xs px-2 py-1 col-span-1 sm:col-span-1 sm:col-start-2 sm:row-start-7 font-bold">High</div>
+						<div class="border border-slate-200 text-xs px-2 py-1 col-span-2 sm:col-span-1 sm:col-start-2 sm:row-start-8 font-bold">Very High</div>
+						<div data-prob="1" class="prob border border-slate-200 text-xs px-2 py-1 col-span-3 sm:col-span-1 sm:col-start-3 sm:row-start-4 text-center">1</div>
+						<div data-prob="2" class="prob border border-slate-200 text-xs px-2 py-1 col-span-1 sm:col-span-1 sm:col-start-3 sm:row-start-5 text-center">2</div>
+						<div data-prob="3" class="prob border border-slate-200 text-xs px-2 py-1 col-span-1 sm:col-span-1 sm:col-start-3 sm:row-start-6 text-center">3</div>
+						<div data-prob="4" class="prob border border-slate-200 text-xs px-2 py-1 col-span-1 sm:col-span-1 sm:col-start-3 sm:row-start-7 text-center">4</div>
+						<div data-prob="5" class="prob border border-slate-200 text-xs px-2 py-1 col-span-2 sm:col-span-1 sm:col-start-3 sm:row-start-8 text-center">5</div>
+	
+						<div data-vals="imp-1-prob-1" class="border border-slate-200 text-xs px-2 py-1 col-span-3 sm:col-span-1 sm:col-start-4 sm:row-start-4 bg-yellow-300">1</div>
+						<div data-vals="imp-2-prob-1" class="border border-slate-200 text-xs px-2 py-1 col-span-1 sm:col-span-1 sm:col-start-5 sm:row-start-4 bg-yellow-300">2</div>
+						<div data-vals="imp-3-prob-1" class="border border-slate-200 text-xs px-2 py-1 col-span-1 sm:col-span-1 sm:col-start-6 sm:row-start-4 bg-yellow-300">3</div>
+						<div data-vals="imp-4-prob-1" class="border border-slate-200 text-xs px-2 py-1 col-span-1 sm:col-span-1 sm:col-start-7 sm:row-start-4 bg-orange-400">4</div>
+						<div data-vals="imp-5-prob-1" class="border border-slate-200 text-xs px-2 py-1 col-span-2 sm:col-span-1 sm:col-start-8 sm:row-start-4 bg-orange-800">5</div>
+	
+						<div data-vals="imp-1-prob-2" class="border border-slate-200 text-xs px-2 py-1 col-span-3 sm:col-span-1 sm:col-start-4 sm:row-start-5 bg-yellow-300">2</div>
+						<div data-vals="imp-2-prob-2" class="border border-slate-200 text-xs px-2 py-1 col-span-1 sm:col-span-1 sm:col-start-5 sm:row-start-5 bg-yellow-300">4</div>
+						<div data-vals="imp-3-prob-2" class="border border-slate-200 text-xs px-2 py-1 col-span-1 sm:col-span-1 sm:col-start-6 sm:row-start-5 bg-orange-400">6</div>
+						<div data-vals="imp-4-prob-2" class="border border-slate-200 text-xs px-2 py-1 col-span-1 sm:col-span-1 sm:col-start-7 sm:row-start-5 bg-orange-400">8</div>
+						<div data-vals="imp-5-prob-2" class="border border-slate-200 text-xs px-2 py-1 col-span-2 sm:col-span-1 sm:col-start-8 sm:row-start-5 bg-orange-800">10</div>
+	
+						<div data-vals="imp-1-prob-3" class="border border-slate-200 text-xs px-2 py-1 col-span-3 sm:col-span-1 sm:col-start-4 sm:row-start-6 bg-yellow-300">3</div>
+						<div data-vals="imp-2-prob-3" class="border border-slate-200 text-xs px-2 py-1 col-span-1 sm:col-span-1 sm:col-start-5 sm:row-start-6 bg-orange-400">6</div>
+						<div data-vals="imp-3-prob-3" class="border border-slate-200 text-xs px-2 py-1 col-span-1 sm:col-span-1 sm:col-start-6 sm:row-start-6 bg-orange-400">9</div>
+						<div data-vals="imp-4-prob-3" class="border border-slate-200 text-xs px-2 py-1 col-span-1 sm:col-span-1 sm:col-start-7 sm:row-start-6 bg-orange-800">12</div>
+						<div data-vals="imp-5-prob-3" class="border border-slate-200 text-xs px-2 py-1 col-span-2 sm:col-span-1 sm:col-start-8 sm:row-start-6 bg-red-600">15</div>
+
+						<div data-vals="imp-1-prob-4" class="border border-slate-200 text-xs px-2 py-1 col-span-3 sm:col-span-1 sm:col-start-4 sm:row-start-7 bg-yellow-300">4</div>
+						<div data-vals="imp-2-prob-4" class="border border-slate-200 text-xs px-2 py-1 col-span-1 sm:col-span-1 sm:col-start-5 sm:row-start-7 bg-orange-400">8</div>
+						<div data-vals="imp-3-prob-4" class="border border-slate-200 text-xs px-2 py-1 col-span-1 sm:col-span-1 sm:col-start-6 sm:row-start-7 bg-orange-800">12</div>
+						<div data-vals="imp-4-prob-4" class="border border-slate-200 text-xs px-2 py-1 col-span-1 sm:col-span-1 sm:col-start-7 sm:row-start-7 bg-red-600">16</div>
+						<div data-vals="imp-5-prob-4" class="border border-slate-200 text-xs px-2 py-1 col-span-2 sm:col-span-1 sm:col-start-8 sm:row-start-7 bg-red-600">20</div>
+
+						<div data-vals="imp-1-prob-5" class="border mb-8 sm:mb-0 border-slate-200 text-xs px-2 py-1 col-span-3 sm:col-span-1 sm:col-start-4 sm:row-start-8 bg-yellow-300">5</div>
+						<div data-vals="imp-2-prob-5" class="border mb-8 sm:mb-0 border-slate-200 text-xs px-2 py-1 col-span-1 sm:col-span-1 sm:col-start-5 sm:row-start-8 bg-orange-800">10</div>
+						<div data-vals="imp-3-prob-5" class="border mb-8 sm:mb-0 border-slate-200 text-xs px-2 py-1 col-span-1 sm:col-span-1 sm:col-start-6 sm:row-start-8 bg-red-600">15</div>
+						<div data-vals="imp-4-prob-5" class="border mb-8 sm:mb-0 border-slate-200 text-xs px-2 py-1 col-span-1 sm:col-span-1 sm:col-start-7 sm:row-start-8 bg-red-600">20</div>
+						<div data-vals="imp-5-prob-5" class="border mb-8 sm:mb-0 border-slate-200 text-xs px-2 py-1 col-span-2 sm:col-span-1 sm:col-start-8 sm:row-start-8 bg-red-600">25</div>
+	
+						<div data-crits class="border border-slate-200 text-xs px-2 py-1 col-span-4 sm:col-start-4 sm:row-start-9 sm:col-span-2 bg-yellow-300">1</div>
+						<div data-crits class="border border-slate-200 text-xs px-2 py-1 sm:col-span-1 sm:col-start-6 sm:row-start-9 bg-orange-400">2</div>
+						<div data-crits class="border border-slate-200 text-xs px-2 py-1 sm:col-span-1 sm:col-start-7 sm:row-start-9 bg-orange-800">3</div>
+						<div data-crits class="border border-slate-200 text-xs px-2 py-1 col-span-2 sm:col-span-1 sm:col-start-8 sm:row-start-9 bg-red-600">4</div>
+						<div data-crits="scale-1" class="border border-slate-200 text-xs px-2 py-1 col-span-4 sm:col-start-4 sm:row-start-10 font-bold sm:col-span-2 bg-yellow-300">Low</div>
+						<div data-crits="scale-2" class="border border-slate-200 text-xs px-2 py-1 sm:col-start-6 sm:row-start-10 font-bold bg-orange-400">Moderate</div>
+						<div data-crits="scale-3" class="border border-slate-200 text-xs px-2 py-1 sm:col-start-7 sm:row-start-10 font-bold bg-orange-800">Significant</div>
+						<div data-crits="scale-4" class="border border-slate-200 text-xs px-2 py-1 col-span-2 sm:col-start-8 sm:row-start-10 font-bold bg-red-600">Severe</div>
+						<div class="border border-slate-200 text-sm px-2 py-1 col-span-8 sm:col-span-5 sm:col-start-4 sm:row-start-11 bg-slate-200 text-center font-bold">Total Risk = <span class="font-normal">(Probability * Impact)</span></div>
+
+						<div class="col-span-8 sm:col-span-9 my-4"><div id="status" class="text-lg p-2 text-center bg-slate-100 rounded-lg font-bold"></div></div>
+	
+					</div>
+				</div>
+	
+				<div>
+					<p class="p-2 border-2 italic text-sm"><span class="font-bold">Probability Score</span> = (Ease of Discovery <span id="v-eod_result"></span> + Ease of Exploit <span id="v-eoe_result"></span> + Awareness <span id="v-a_result"></span> + Ability to Detect <span id="v-atd_result"></span>) / 4 <span id="totalprob"></span></p>
+
+					<p class="p-2 border-2 italic text-sm"><span class="font-bold">Impact Score</span> = (Loss of Confidentiality <span id="t-loc_result"></span> + Loss of Integrity <span id="t-loi_result"></span> + Loss of Availability <span id="t-loa_result"></span> + Loss of Traceability <span id="t-lot_result"></span>) / 4 <span id="totalimp"></span></p>
+
+					<p class="p-2 border-2 italic text-sm"><span class="font-bold">Note: </span>The Probability & Impact final score is rounded to the nearest whole number.</p>
+					
+					<p class="p-2 border-2 italic text-sm"><span class="font-bold">Total Risk</span> = Probability <span id="totalprob_rounded"></span> * Impact <span id="totalimp_rounded"></span> <span id="totalrisk"></span></p>
+
+				</div>
+			</div>
+		</div>
+
+
+
+		<div id="explainer" class="fixed opacity-0 pointer-events-none top-0 left-0 h-screen w-screen grid overflow-auto place-items-center ">
+			<div onclick="toggleExplainer()" class="bg bg-black opacity-75 fixed top-0 left-0 h-screen w-screen z-10"></div>
+			<div class="container mx-auto my-4 p-4 border-2 rounded-xl z-20 bg-white">
+				<h3 class="text-lg font-bold flex items-center justify-between">How is the Vulnerability Risk Calculated? <span  onclick="toggleExplainer()" class="cursor-pointer">Close</span></h3>
+				<hr class="my-4">
+				<div class="lg:grid grid-cols-3 gap-8 text-sm">
+					<div class="flex flex-col justify-between">
+						<div class="mb-2">
+							<p class="font-bold">Vulnerability Factors</p>
+							<small>
+								Each factor has a set of options, and each option has a probability rating from 0 to 5 associated. These numbers are used to estimate the probability based on the formula below:
+							</small>
+						</div>
+						<p class="p-2 border-2 italic text-xs">Probability Score = (Ease of Discovery + Ease of Exploit + Awareness + Ability to Detect) / 4</p>
+					</div>
+					<div class="flex flex-col justify-between">
+						<div class="mb-2">
+							<p class="font-bold">Technical Impact Factors </p>
+							<small>
+								Each factor has a set of options, and each option has a impact rating from 0 to 5 associated. These numbers are used to estimate the impact based on the formula below:
+							</small>
+						</div>
+						<p class="p-2 border-2 italic text-xs">Impact Score = (Loss of Confidentiality + Loss of Integrity + Loss of Availability + Loss of Traceability) / 4</p>
+					</div>
+					<div class="flex flex-col justify-between">
+						<div class="mb-2">
+							<p class="font-bold">Total Risk </p>
+							<small>
+								Total Risk is determined by the formula below:
+							</small>
+						</div>
+						<p class="p-2 border-2 italic text-xs">Total Risk = Probability * Impact  <br> <br></p>
+					</div>
+		
+					<!-- </div>
+						<div class="grid grid-cols-2 border-2 p-2">
+						<div class="col-span-2 border-b-2 font-bold pb-2">
+							Probability and Impact Levels
+						</div>
+						<span class="border-b-2 p-2 grid place-items-center">0.1 – 3.9</span>
+						<span class="border-b-2 p-2 grid place-items-center text-center font-bold bg-yellow-300">Low</span>
+						<span class="border-b-2 p-2 grid place-items-center">4.0 – 6.9</span>
+						<span class="border-b-2 p-2 grid place-items-center text-center font-bold bg-orange-400">Moderate</span>
+						<span class="border-b-2 p-2 grid place-items-center">7.0 – 8.9</span>
+						<span class="border-b-2 p-2 grid place-items-center text-center font-bold bg-orange-800">Significant</span>
+						<span class="border-b-2 p-2 grid place-items-center">9.0 – 10.0</span>
+						<span class="border-b-2 p-2 grid place-items-center text-center font-bold bg-red-600">Severe</span>
+					</div> -->
+	<!-- <hr class="my-4"> -->
+			</div>
+			<div class="lg:grid grid-cols-2 gap-8 mt-8 pt-8 border-t border-slate-200">
+				<div class="grid grid-cols-2 gap-4 items-start mb-4 sm:mb-0">
+					<p class="font-bold col-span-2">Vulnerability Factors</p>
+					<div class="text-xs">
+						<label for="" class="block font-bold">Ease of Discovery</label>
+						<small class="text-xs">How easy is it for a group of threat actors to discover this vulnerability?</small>
+						<hr class="my-2">
+						<span class=" flex items-center justify-between">Practically Impossible <span>1</span></span>
+						<span class=" flex items-center justify-between">Difficult <span>3</span></span>
+						<span class=" flex items-center justify-between">Easy <span>4</span></span>
+						<span class=" flex items-center justify-between">Automated Tools Available <span>5</span></span>
+					</div>
+					<div class="text-xs">
+						<label for="" class="block font-bold">Ease of Exploit</label>
+						<small class="text-xs">How easy is it for a group of threat agents to exploit this vulnerability?</small>
+						<hr class="my-2">
+						<span class=" flex items-center justify-between">Non Exploitable <span>1</span></span>
+						<span class=" flex items-center justify-between">Difficult <span>3</span></span>
+						<span class=" flex items-center justify-between">Easy <span>4</span></span>
+						<span class=" flex items-center justify-between">Automated Tools Available <span>5</span></span>
+					</div>
+					<div class="text-xs">
+						<label for="" class="block font-bold">Awareness</label>
+						<small class="text-xs">How well known is this vulnerability to a group of threat actors?</small>
+						<hr class="my-2">
+						<span class=" flex items-center justify-between">Unknown <span>1</span></span>
+						<span class=" flex items-center justify-between">Hidden <span>3</span></span>
+						<span class=" flex items-center justify-between">Obvious <span>4</span></span>
+						<span class=" flex items-center justify-between">Public Knowledge <span>5</span></span>
+					</div>
+					<div class="text-xs">
+						<label for="" class="block font-bold">Ability to Detect</label>
+						<small class="text-xs">How likely is an exploit to be detected?</small>
+						<hr class="my-2">
+						<span class=" flex items-center justify-between">Active Detection in Application <span>1</span></span>
+						<span class=" flex items-center justify-between">Logged and Monitored <span>3</span></span>
+						<span class=" flex items-center justify-between">Logged without Monitoring <span>4</span></span>
+						<span class=" flex items-center justify-between">Not Logged <span>5</span></span>
+					</div>
+				</div>
+
+				<div class="grid grid-cols-2 gap-4 items-start">
+					<p class="font-bold col-span-2">Technical Impact Factors</p>
+					<div class="text-xs">
+						<label for="" class="block font-bold">Loss of Confidentiality</label>
+						<small class="text-xs">What data could be disclosed and how sensitive is it?</small>
+						<hr class="my-2">
+						<span class=" flex items-center justify-between">No Data Disclosed <span>0</span></span>
+						<span class=" flex items-center justify-between">Non-Sensitive Data Disclosed <span>1</span></span>
+						<span class=" flex items-center justify-between">Sensitive Data Disclosed <span>3</span></span>
+						<span class=" flex items-center justify-between">Personal Data Disclosed <span>4</span></span>
+						<span class=" flex items-center justify-between">All Data Disclosed <span>5</span></span>
+					</div>
+					<div class="text-xs">
+						<label for="" class="block font-bold">Loss of Integrity</label>
+						<small class="text-xs">How much data could be corrupted and how damaged could it be?</small>
+						<hr class="my-2">
+						<span class=" flex items-center justify-between">No Loss of Integrity <span>0</span></span>
+						<span class=" flex items-center justify-between">Low Corrupt Data <span>1</span></span>
+						<span class=" flex items-center justify-between">Moderate Corrupt Data <span>3</span></span>
+						<span class=" flex items-center justify-between">Significant Corrupt Data <span>4</span></span>
+						<span class=" flex items-center justify-between">Severe Corrupt Data <span>5</span></span>
+					</div>
+					<div class="text-xs">
+						<label for="" class="block font-bold">Loss of Availability</label>
+						<small class="text-xs">How much service could be lost and how critical is it?</small>
+						<hr class="my-2">
+						<span class=" flex items-center justify-between">No Loss of Availability <span>0</span></span>
+						<span class=" flex items-center justify-between">Secondary Services Interrupted <span>1</span></span>
+						<span class=" flex items-center justify-between">Primary Services Interrupted <span>3</span></span>
+						<span class=" flex items-center justify-between">All Services Completely Lost <span>5</span></span>
+					</div>
+					<div class="text-xs">
+						<label for="" class="block font-bold">Loss of Traceabilty</label>
+						<small class="text-xs">Are the threat actors actions traceable to an individual?</small>
+						<hr class="my-2">
+						<span class=" flex items-center justify-between">Completely Traceable <span>1</span></span>
+						<span class=" flex items-center justify-between">Possibly Traceable <span>3</span></span>
+						<span class=" flex items-center justify-between">Completely Anonymous <span>5</span></span>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+
+		<script src="./js/script.js"></script>
+	</body>
+</html>

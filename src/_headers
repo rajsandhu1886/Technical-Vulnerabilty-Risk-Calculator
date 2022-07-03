@@ -1,0 +1,5 @@
+/*
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+  Expect-CT: max-age=7776000
+  Referrer-Policy: same-origin

@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+	word-wrap: break-word;
+}
+#vector {
+	display: block;
+	width: 100%;
+	overflow: auto;
+}
+.bg-orange-800,
+.bg-red-600,
+.bg-red-800 {
+	color: #fff !important;
+}
+
+.selected {
+	border: 2px solid red !important;
+	opacity: 1;
+}
