@@ -6,4 +6,4 @@ The vulnerability risk calculator saves time and clarifies priorities. The calcu
 
 Disclaimer: This calculator is inspired by OWASP's Risk Rating Methodology which does not include "Threat Agent Factors" and "Business Impact Factors" as organizations require an enhanced Threat Intelligence capability and a mature Configuration Management Database (CMDB) to use the publicly available OWASP Risk Rating Calculator.
 
-Link to the website --> https://technical-vulnerability-risk-calculator.netlify.app/
+Link to the website hosting the calculator --> https://technical-vulnerability-risk-calculator.netlify.app/
